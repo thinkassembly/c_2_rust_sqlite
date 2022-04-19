@@ -25,3 +25,9 @@ make test
 Start looking over the source and see what files I can remove to help clarify the structure.
 A bit of an iterative process since I want to automate and document what I remove.
 
+This process is a bit iterative. 
+
+start using coan to remove preprocessor directives.
+coan doesn't seem to like #line pragmas so search for everywhere they are emitted and removed the code emmitting them.
+
+
