@@ -665,11 +665,10 @@ sqlite3ext.h:	target_source
 	cp tsrc/sqlite3ext.h .
 
 sqlite3.c-debug:	target_source $(TOP)/tool/mksqlite3c.tcl
-	tclsh $(TOP)/tool/mksqlite3c.tcl --linemacros=1
+	tclsh $(TOP)/tool/mksqlite3c.tcl --linemacros=0
 	echo '#ifndef USE_SYSTEM_SQLITE' >tclsqlite3.c
 	cat sqlite3.c >>tclsqlite3.c
 	echo '#endif /* USE_SYSTEM_SQLITE */' >>tclsqlite3.c
-	echo '#line 1 "tclsqlite.c"' >>tclsqlite3.c
 	cat $(TOP)/src/tclsqlite.c >>tclsqlite3.c
 
 sqlite3-all.c:	sqlite3.c $(TOP)/tool/split-sqlite3c.tcl
@@ -726,7 +725,7 @@ parse.h:	parse.c
 
 parse.c:	$(TOP)/src/parse.y lemon
 	cp $(TOP)/src/parse.y .
-	./lemon -s $(OPTS) parse.y
+	./lemon -s $(OPTS) parse.y -l
 
 sqlite3.h:	$(TOP)/src/sqlite.h.in $(TOP)/manifest mksourceid $(TOP)/VERSION $(TOP)/ext/rtree/sqlite3rtree.h
 	tclsh $(TOP)/tool/mksqlite3h.tcl $(TOP) >sqlite3.h
@@ -845,7 +844,7 @@ rtree.o:	$(TOP)/ext/rtree/rtree.c $(HDR) $(EXTHDR)
 fts5parse.c:	$(TOP)/ext/fts5/fts5parse.y lemon
 	cp $(TOP)/ext/fts5/fts5parse.y .
 	rm -f fts5parse.h
-	./lemon $(OPTS) fts5parse.y
+	./lemon $(OPTS) fts5parse.y -l
 
 fts5parse.h: fts5parse.c
 

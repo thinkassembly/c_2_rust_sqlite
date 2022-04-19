@@ -1,5 +1,5 @@
 #!/bin/bash
-coan source --filter c,h --recurse ../c/sqlite -K \
+coan source --filter c,h --recurse ../c/sqlite -K -E \
 -DSQLITE_DQS=0 \
 -DSQLITE_THREADSAFE=0 \
 -DSQLITE_DEFAULT_MEMSTATUS=0 \

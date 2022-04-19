@@ -34,7 +34,7 @@ for {set i 0} {$i<[llength $argv]} {incr i} {
   if {[regexp {^-+nostatic$} $x]} {
     set addstatic 0
   } elseif {[regexp {^-+linemacros} $x]} {
-    set linemacros 1
+    set linemacros 0
   } elseif {[regexp {^-+useapicall} $x]} {
     set useapicall 1
   } else {
@@ -165,7 +165,6 @@ proc copy_file {filename} {
   set ln 0
   set tail [file tail $filename]
   section_comment "Begin file $tail"
-  if {$linemacros} {puts $out "#line 1 \"$filename\""}
   set in [open $filename r]
   set varpattern {^[a-zA-Z][a-zA-Z_0-9 *]+(sqlite3[_a-zA-Z0-9]+)(\[|;| =)}
   set declpattern {([a-zA-Z][a-zA-Z_0-9 ]+ \**)(sqlite3[_a-zA-Z0-9]+)(\(.*)}

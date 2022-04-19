@@ -455,7 +455,7 @@ TESTSRC = \
   $(TOP)/ext/fts3/fts3_term.c \
   $(TOP)/ext/fts3/fts3_test.c  \
   $(TOP)/ext/session/test_session.c \
-  $(TOP)/ext/rbu/test_rbu.c 
+  $(TOP)/ext/rbu/test_rbu.c
 
 # Statically linked extensions
 #
@@ -1102,7 +1102,7 @@ parse.h:	parse.c
 
 parse.c:	$(TOP)/src/parse.y lemon$(BEXE)
 	cp $(TOP)/src/parse.y .
-	./lemon$(BEXE) $(OPT_FEATURE_FLAGS) $(OPTS) -S parse.y
+	./lemon$(BEXE) $(OPT_FEATURE_FLAGS) $(OPTS) -S parse.y -l
 
 sqlite3.h:	$(TOP)/src/sqlite.h.in $(TOP)/manifest mksourceid$(BEXE) $(TOP)/VERSION
 	$(TCLSH_CMD) $(TOP)/tool/mksqlite3h.tcl $(TOP) >sqlite3.h
@@ -1241,7 +1241,7 @@ FTS5_SRC = \
 fts5parse.c:	$(TOP)/ext/fts5/fts5parse.y lemon$(BEXE)
 	cp $(TOP)/ext/fts5/fts5parse.y .
 	rm -f fts5parse.h
-	./lemon$(BEXE) $(OPTS) -S fts5parse.y
+	./lemon$(BEXE) $(OPTS) -S fts5parse.y -l
 
 fts5parse.h: fts5parse.c
 
@@ -1499,7 +1499,7 @@ tcl_install:	lib_install libtclsqlite3.la pkgIndex.tcl
 	rm -f $(DESTDIR)$(TCLLIBDIR)/libtclsqlite3.la $(DESTDIR)$(TCLLIBDIR)/libtclsqlite3.a
 	$(INSTALL) -m 0644 pkgIndex.tcl $(DESTDIR)$(TCLLIBDIR)
 
-clean:	
+clean:
 	rm -f *.lo *.la *.o sqlcipher$(TEXE) libsqlcipher.la
 	rm -f sqlite3.h opcodes.*
 	rm -rf .libs .deps

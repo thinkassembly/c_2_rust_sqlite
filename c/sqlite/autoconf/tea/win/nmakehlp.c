@@ -736,16 +736,7 @@ static int LocateDependencyHelper(const char *dir, const char *keypath)
     strncpy(path+dirlen, "\\*", 3);	/* Including terminating \0 */
     keylen = strlen(keypath);
 
-#if 0 /* This function is not available in Visual C++ 6 */
-    /*
-     * Use numerics 0 -> FindExInfoStandard,
-     * 1 -> FindExSearchLimitToDirectories,
-     * as these are not defined in Visual C++ 6
-     */
-    hSearch = FindFirstFileEx(path, 0, &finfo, 1, NULL, 0);
-#else
     hSearch = FindFirstFile(path, &finfo);
-#endif
     if (hSearch == INVALID_HANDLE_VALUE)
 	return 1; /* Not found */
 

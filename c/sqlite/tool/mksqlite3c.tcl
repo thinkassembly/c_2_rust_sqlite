@@ -47,7 +47,7 @@ for {set i 0} {$i<[llength $argv]} {incr i} {
   if {[regexp {^-?-nostatic$} $x]} {
     set addstatic 0
   } elseif {[regexp {^-?-linemacros(?:=([01]))?$} $x ma ulm]} {
-    if {$ulm == ""} {set ulm 1}
+    if {$ulm == ""} {set ulm 0}
     set linemacros $ulm
   } elseif {[regexp {^-?-useapicall$} $x]} {
     set useapicall 1
@@ -114,7 +114,7 @@ if {$addstatic} {
 # Examine the parse.c file.  If it contains lines of the form:
 #
 #    "#ifndef SQLITE_ENABLE_UPDATE_LIMIT
-# 
+#
 # then set the SQLITE_UDL_CAPABLE_PARSER flag in the amalgamation.
 #
 set in [open $srcdir/parse.c]
@@ -212,7 +212,6 @@ proc copy_file {filename} {
   set ln 0
   set tail [file tail $filename]
   section_comment "Begin file $tail"
-  if {$linemacros} {puts $out "#line 1 \"$filename\""}
   set in [open $filename r]
   set varpattern {^[a-zA-Z][a-zA-Z_0-9 *]+(sqlite3[_a-zA-Z0-9]+)(\[|;| =)}
   set declpattern {([a-zA-Z][a-zA-Z_0-9 ]+ \**)(sqlite3[_a-zA-Z0-9]+)(\(.*)}
